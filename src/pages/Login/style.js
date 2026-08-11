@@ -27,7 +27,7 @@ export const SubtitleLogin = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
-export const ContainerForms = styled.View`
+export const ContainerForms = styled.KeyboardAvoidingView`
   margin-top: 40px;
   width: 80%;
   flex-direction: column;

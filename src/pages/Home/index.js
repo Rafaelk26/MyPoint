@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 
@@ -10,6 +10,9 @@ import { ButtonSubmit } from '../../components/ButtonSubmit';
 
 // Hooks
 import { Screen } from '../../hooks/Screen';
+
+// Contexts
+import { UserContext } from '../../context/userContext';
 
 // Theme
 import { theme } from '../../global/styles/theme';
@@ -39,6 +42,7 @@ import {
 export default function Home() {
 
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(UserContext);
   const [date, setDate] = useState('');
   const [hour, setHour] = useState('--:--:--');
   const [currentStep, setCurrentStep] = useState(0);
@@ -170,7 +174,7 @@ export default function Home() {
         {/* Title Info */}
         <ContainerInfo>
           <TitleInfo>{getGreeting()}</TitleInfo>
-          <NameInfo>Rafael Kikuchi</NameInfo>
+          <NameInfo>{user.name}</NameInfo>
           <DateInfo>{date}</DateInfo>
         </ContainerInfo>
 

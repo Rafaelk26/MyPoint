@@ -33,7 +33,8 @@ export default function ForgotPassword() {
 
       {/* Container Forms */}
       <ContainerForms>
-        <Input placeholder="Email" type="default" />
+        <Input />
+        {/* <Input placeholder="Email" type="default" /> */}
         <ButtonSubmit title="Enviar Email" />
         <LinkText onPress={() => navigation.goBack()}>
           Retornar ao Login

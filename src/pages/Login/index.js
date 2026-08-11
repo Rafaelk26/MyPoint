@@ -1,3 +1,5 @@
+import { useState, useContext } from 'react';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,6 +9,12 @@ import { Input } from '../../components/Input';
 import { InputPassword } from '../../components/InputPassword';
 import { ButtonSubmit } from '../../components/ButtonSubmit';
 import { TextFooter } from '../../components/FooterText';
+
+// Functions
+import { handleLogin } from '../../functions/handleLogin';
+
+// Context
+import { UserContext } from '../../context/userContext';
 
 // Styles
 import { 
@@ -21,6 +29,19 @@ import {
 export default function Login() {
 
  const navigation = useNavigation();
+ const { getUser } = useContext(UserContext);
+ const [email, setEmail] = useState(null);
+ const [password, setPassword] = useState(null);
+
+ async function handleLoginPost(){  
+   try{
+    const response = await handleLogin(email, password);
+    getUser(response.user);
+   }
+   catch(err){
+    console.log(`Não foi possível se logar: ${err}`);
+   }
+ }
 
  return (
    <Container>
@@ -34,13 +55,21 @@ export default function Login() {
       </ContainerTitle>
 
       {/* Container Forms */}
-      <ContainerForms>
-        <Input placeholder="CPF" type="numeric" />
-        <InputPassword placeholder="Senha" />
+      <ContainerForms
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <Input 
+         placeholder="Email"
+         onChangeText={(text)=> setEmail(text)}
+        />
+        <InputPassword 
+         onChangeText={(text)=> setPassword(text)}
+         placeholder="Senha" 
+        />
         <LinkText onPress={() => navigation.navigate('ForgotPassword')}>
           Esqueci minha senha
         </LinkText>
-        <ButtonSubmit title="Entrar" />
+        <ButtonSubmit title="Entrar" onPress={handleLoginPost} />
       </ContainerForms>
       
       {/* Footer Text */}

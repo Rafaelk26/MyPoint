@@ -1,13 +1,22 @@
 import { createContext, useState } from 'react';
 
+// Functions
+import { findUser } from '../functions/findUser';
+
 export const UserContext = createContext();
 
 export function UserProvider({ children }){
     // State global user
-    const [user, setUser] = useState(true);
+    const [user, setUser] = useState(null);
+
+    async function getUser(user){
+        const data = await findUser(user.id);
+        setUser(data);
+        return data;
+    }
 
     return(
-        <UserContext.Provider value={{ user }}>
+        <UserContext.Provider value={{ user, getUser }}>
             { children }
         </UserContext.Provider>
     )
