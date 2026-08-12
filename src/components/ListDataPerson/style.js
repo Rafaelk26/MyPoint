@@ -6,7 +6,7 @@ export const Container = styled.View`
     align-items: center;
     border-bottom-width: ${({ isLast }) => isLast ? '0px' : '0.5px'};
     border-color: ${({ theme }) => theme.colors.border};
-    padding-top: 20px;
+    padding-top: 12px;
     padding-bottom: 12px;
 `;
 

@@ -52,12 +52,7 @@ export default function Home() {
     'Almoço (Volta)',
     'Saída',
   ];
-  const [stops, setStops] = useState([
-    { name: 'Entrada', hour: '--:--', done: false },
-    { name: 'Almoço (Ida)', hour: '--:--', done: false },
-    { name: 'Almoço (Volta)', hour: '--:--', done: false },
-    { name: 'Saída', hour: '--:--', done: false },
-  ]);
+  const stops = user?.point ?? [];
 
   // Use theme
   const theme = useTheme(theme);
@@ -202,7 +197,7 @@ export default function Home() {
         {/* Point Word Table */}
         <ContainerPointDairyTable>
           <FlatListPoint 
-          data={stops}
+          data={user?.point ?? []}
           keyExtractor={item => item.name}
           renderItem={({ item })=> (
             <ListHoursPoint name={item.name} hour={item.hour} done={item.done} />

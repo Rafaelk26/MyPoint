@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 // Components
 import { ContainerLayout } from '../../components/Container';
@@ -6,6 +6,9 @@ import { ListDataPerson } from '../../components/ListDataPerson';
 
 // Hooks
 import { Screen } from '../../hooks/Screen';
+
+// Context
+import { UserContext } from '../../context/userContext';
 
 // Style
 import {
@@ -21,13 +24,14 @@ import { ButtonSubmit } from '../../components/ButtonSubmit';
 export default function Profile() {
 
   const [loading, setLoading] = useState(true);
+  const { user, signOut } = useContext(UserContext);
 
   const [profileInfo, setProfileInfo] = useState([
-    { id: 1, name: "Nome", icon: "user-alt", value: "Rafael Kikuchi" },
-    { id: 2, name: "CPF", icon: "id-badge", value: "525.064.908-41" },
-    { id: 3, name: "Email", icon: "at", value: "rafaelk262002@gmail.com" },
-    { id: 4, name: "Telefone", icon: "phone-alt", value: "(12) 98196-0559" },
-    { id: 5, name: "Cargo", icon: "chess-rook", value: "Web Designer" },
+    { id: 1, name: "Nome", icon: "user-alt", value: user.name },
+    { id: 2, name: "CPF", icon: "id-badge", value: user.cpf },
+    { id: 3, name: "Email", icon: "at", value: user.email },
+    { id: 4, name: "Telefone", icon: "phone-alt", value: user.phone },
+    { id: 5, name: "Cargo", icon: "chess-rook", value: user.position },
     { id: 6, name: "Empresa", icon: "building", value: "Escala de Milhões..." },
   ]);
 
@@ -53,7 +57,6 @@ export default function Profile() {
     <Screen loading={loading}>
       <ContainerLayout>
         <ScrollContainer>
-
           <Title>Meu Perfil</Title>
 
           {/* Dados Pessoais */}
@@ -85,11 +88,9 @@ export default function Profile() {
 
           {/* Logout */}
           <ViewLogoutButton>
-            <ButtonSubmit title="Sair da conta" />
+            <ButtonSubmit title="Sair da conta" onPress={signOut} />
           </ViewLogoutButton>
-
         </ScrollContainer>
-
       </ContainerLayout>
 
     </Screen>
