@@ -80,7 +80,12 @@ export function UserProvider({ children }){
             
             // Success
             await AsyncStorage.setItem('@myPointToken', data.session.access_token);
+            await supabase.from('employees')
+            .update({ status: 'active' })
+            .eq('auth_user_id', data.user.id);
+
             setAuthLoading(false);
+            return data;
         }
         catch(err){
             // Failed
