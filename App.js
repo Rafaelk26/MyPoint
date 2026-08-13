@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components/native';
+import Toast from 'react-native-toast-message';
 import { useContext } from 'react';
 import {
   useFonts,
@@ -33,7 +34,9 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <ThemeProvider theme={theme}>
+          <StatusBar style='dark' />
           <Routes />
+          <Toast />
         </ThemeProvider>
       </NavigationContainer>
     </UserProvider>

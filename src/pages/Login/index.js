@@ -30,7 +30,7 @@ export default function Login() {
  const [password, setPassword] = useState(null);
 
  async function handleLoginPost(){  
-   try{
+  try{
     const response = await signIn(email, password);
     await getUser(response.user);
    }
