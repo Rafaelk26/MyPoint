@@ -368,6 +368,7 @@ export default function Home() {
 
   }, [user?.id]);
 
+
  return (
     <Screen loading={loading}>
       <ContainerLayout>

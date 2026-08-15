@@ -15,9 +15,15 @@ import {
     ButtonOpenStackDoc,
 } from './style';
 
+function formatDateToBrazil(date) {
+  if (!date) return '--/--/----';
+  const [year, month, day] = date.split('-');
+  return `${day}/${month}/${year}`;
+}
+
 function DocPDF({ data }) {
 
-const duration = `${data.workedHours.slice(0,2)}h ${data.workedHours.slice(3,5)}min`;
+const duration = `${data.worked_hours.slice(0,2)}h ${data.worked_hours.slice(3,5)}min`;
 
  // Use theme and navigation with native stack
  const theme = useTheme();
@@ -28,8 +34,8 @@ const duration = `${data.workedHours.slice(0,2)}h ${data.workedHours.slice(3,5)}
     <ViewInfo>
      <FontAwesome5 name='calendar' size={24} color={theme.colors.blue} />
      <ViewDateInfo>
-        <TextDayDate>{data.date}</TextDayDate>
-        <TextDayName>Quarta-feira</TextDayName>
+        <TextDayDate>{formatDateToBrazil(data.date)}</TextDayDate>
+        <TextDayName>----</TextDayName>
      </ViewDateInfo>
     </ViewInfo>
     

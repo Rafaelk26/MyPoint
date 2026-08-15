@@ -8,6 +8,9 @@ import { ButtonSubmit } from '../../components/ButtonSubmit';
 import { ListHoursPoint } from '../../components/ListHoursPoint';
 import { ListExtraTime } from '../../components/ListExtraTime';
 
+// Functions
+import { formatDateToBrazil } from '../../functions/formatDateToBrazil';
+
 // Hooks
 import { Screen } from '../../hooks/Screen';
 
@@ -35,17 +38,11 @@ export default function DayDetails() {
 
   // States
   const [loading, setLoading] = useState(true);
-  const [stops, setStops] = useState([
-    { name: 'Entrada', hour: '07:48', done: true },
-    { name: 'Almoço (Ida)', hour: '13:07', done: true },
-    { name: 'Almoço (Volta)', hour: '14:15', done: true },
-    { name: 'Saída', hour: '17:56', done: true },
-  ]);
+  const [stops, setStops] = useState([]);
   const [times, setTimes] = useState([
-    {name: 'Horas trabalhadas', time: '00:00'},
-    {name: 'Horas extras', time: '00:00'},
-    {name: 'Carga horária do dia', time: '00:00'},
-    {name: 'Saldo do dia', time: '00:00'},
+    {name: 'Horas trabalhadas', time: data.worked_hours},
+    {name: 'Horas extras', time: data.extra_hours},
+    {name: 'Saldo do dia', time: data.balance},
   ]);
 
   useEffect(()=>{
@@ -56,6 +53,15 @@ export default function DayDetails() {
     }
 
     load();
+  }, []);
+
+  useEffect(()=> {
+    const dataReq = data.time_points;
+    const dataRes = dataReq.map(item=> ({
+      ...item,
+      done: item.time ? true : false,
+    }));
+    setStops(dataRes);
   }, []);
 
  return (
@@ -74,7 +80,7 @@ export default function DayDetails() {
 
           <ViewTitleDetails>
             <TitleDetails>Detalhes do Dia</TitleDetails>
-            <DateDetails>{data.date}</DateDetails>
+            <DateDetails>{formatDateToBrazil(data.date)}</DateDetails>
           </ViewTitleDetails>
         </ContainerDetails>
         
@@ -82,9 +88,9 @@ export default function DayDetails() {
         <ContainerInfoHourPoint>
           <ListInfoPoint
           data={stops}
-          keyExtractor={item=> String(item.name)}
+          keyExtractor={item=> String(item.id)}
           renderItem={({ item })=> (
-            <ListHoursPoint name={item.name} hour={item.hour} done={item.done} />
+            <ListHoursPoint name={item.type} hour={item.time} done={item.done} />
           )}
           />
         </ContainerInfoHourPoint>
