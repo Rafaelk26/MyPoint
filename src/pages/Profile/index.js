@@ -3,6 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 // Components
 import { ContainerLayout } from '../../components/Container';
 import { ListDataPerson } from '../../components/ListDataPerson';
+import { ButtonSubmit } from '../../components/ButtonSubmit';
+
+// Functions 
+import { formatCPF } from '../../functions/formatCPF';
 
 // Hooks
 import { Screen } from '../../hooks/Screen';
@@ -19,7 +23,6 @@ import {
   ViewLogoutButton
 } from './style';
 
-import { ButtonSubmit } from '../../components/ButtonSubmit';
 
 export default function Profile() {
 
@@ -28,7 +31,7 @@ export default function Profile() {
 
   const [profileInfo, setProfileInfo] = useState([
     { id: 1, name: "Nome", icon: "user-alt", value: user.name },
-    { id: 2, name: "CPF", icon: "id-badge", value: user.cpf },
+    { id: 2, name: "CPF", icon: "id-badge", value: formatCPF(user.cpf) },
     { id: 3, name: "Email", icon: "at", value: user.email },
     { id: 4, name: "Telefone", icon: "phone-alt", value: user.phone },
     { id: 5, name: "Cargo", icon: "chess-rook", value: user.position },

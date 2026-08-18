@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import Toast from 'react-native-toast-message';
 
 // Components
 import { ContainerLayout } from '../../components/Container';
@@ -10,6 +11,10 @@ import { ListExtraTime } from '../../components/ListExtraTime';
 
 // Functions
 import { formatDateToBrazil } from '../../functions/formatDateToBrazil';
+import { generateWorkDayPDF } from '../../functions/generateWorkDayPDF';
+
+// Context
+import { UserContext } from '../../context/userContext';
 
 // Hooks
 import { Screen } from '../../hooks/Screen';
@@ -34,6 +39,7 @@ export default function DayDetails() {
   // Route for data collect
   const route = useRoute();
   const { data } = route.params;
+  const { user } = useContext(UserContext);
   const nav = useNavigation();
 
   // States
@@ -63,6 +69,17 @@ export default function DayDetails() {
     }));
     setStops(dataRes);
   }, []);
+
+  async function handlePDF(){
+    
+    Toast.show({
+      text1: 'Criando PDF...',
+      type: 'info',
+      position: 'bottom',
+    });
+
+    await generateWorkDayPDF(user, data, data.time_points);
+  }
 
  return (
     <Screen 
@@ -108,7 +125,7 @@ export default function DayDetails() {
 
         {/* Button Gerate PDF */}
         <ViewButtonPosition>
-          <ButtonSubmit title={'Gerar PDF'}>
+          <ButtonSubmit title={'Gerar PDF'} onPress={()=> handlePDF()}>
             <AntDesign name="file-pdf" size={24} color="#fff" />
           </ButtonSubmit>
         </ViewButtonPosition>
