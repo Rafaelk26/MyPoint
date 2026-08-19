@@ -340,5 +340,5 @@ export async function generateWorkDayPDF(user, workDay, points = []){
 
     }
 
-    return uri;
+    return { uri, fileName };
 }

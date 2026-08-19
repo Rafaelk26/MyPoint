@@ -22,3 +22,11 @@ export const ViewSelect = styled.View`
 export const ListPDF = styled.FlatList`
     margin-top: 20px;
 `;
+
+export const TextNotFound = styled.Text`
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;   
+    font-family: ${({ theme })=> theme.fonts.medium};
+    font-size: 14px;
+`;

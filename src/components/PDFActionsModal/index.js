@@ -14,7 +14,6 @@ import {
 export function PDFActionsModal({
   visible,
   onClose,
-  onOpen,
   onDownload,
   onDelete,
 }) {
@@ -31,12 +30,6 @@ export function PDFActionsModal({
         
         <Content>
           <Header />
-
-          <ButtonAction onPress={onOpen}>
-            <TextAction>Visualizar PDF</TextAction>
-          </ButtonAction>
-
-          <Divider />
 
           <ButtonAction onPress={onDownload}>
             <TextAction>Baixar PDF</TextAction>

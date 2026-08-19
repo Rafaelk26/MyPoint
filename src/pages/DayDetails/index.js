@@ -12,6 +12,8 @@ import { ListExtraTime } from '../../components/ListExtraTime';
 // Functions
 import { formatDateToBrazil } from '../../functions/formatDateToBrazil';
 import { generateWorkDayPDF } from '../../functions/generateWorkDayPDF';
+import { uploadWorkDayPDF } from '../../functions/pdf/uploadWorkDayPDF';
+import { uploadPDF } from '../../functions/pdf/uploadPDF';
 
 // Context
 import { UserContext } from '../../context/userContext';
@@ -72,13 +74,35 @@ export default function DayDetails() {
 
   async function handlePDF(){
     
-    Toast.show({
-      text1: 'Criando PDF...',
-      type: 'info',
-      position: 'bottom',
-    });
+    try{
+      Toast.show({
+        text1: 'Criando PDF...',
+        type: 'info',
+        position: 'bottom',
+      });
 
-    await generateWorkDayPDF(user, data, data.time_points);
+      const { uri, fileName } = await generateWorkDayPDF(
+        user,
+        data,
+        data.time_points
+      );
+
+      await uploadPDF(
+        uri,
+        fileName,
+        user.id,
+        data.id
+      );
+    }
+    catch(err){
+      console.log('Erro ao salvar o PDF', err);
+      Toast.show({
+        text1: 'Erro ao gerar PDF',
+        type: 'error',
+        position: 'bottom',
+      });
+    }
+
   }
 
  return (

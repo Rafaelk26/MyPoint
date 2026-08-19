@@ -62,9 +62,9 @@ export default function Login() {
          onChangeText={(text)=> setPassword(text)}
          placeholder="Senha" 
         />
-        <LinkText onPress={() => navigation.navigate('ForgotPassword')}>
+        {/* <LinkText onPress={() => navigation.navigate('ForgotPassword')}>
           Esqueci minha senha
-        </LinkText>
+        </LinkText> */}
         <ButtonSubmit title="Entrar" onPress={handleLoginPost} loading={authLoading} />
       </ContainerForms>
       

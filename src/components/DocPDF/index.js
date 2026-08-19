@@ -35,7 +35,7 @@ const duration = `${data.worked_hours.slice(0,2)}h ${data.worked_hours.slice(3,5
      <FontAwesome5 name='calendar' size={24} color={theme.colors.blue} />
      <ViewDateInfo>
         <TextDayDate>{formatDateToBrazil(data.date)}</TextDayDate>
-        <TextDayName>----</TextDayName>
+        <TextDayName>{data.status === "completed" ? "Dia completo" : "Dia em andamento"}</TextDayName>
      </ViewDateInfo>
     </ViewInfo>
     
