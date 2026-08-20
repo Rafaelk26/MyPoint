@@ -1,6 +1,6 @@
 import { Asset } from 'expo-asset';
 
-export async function getLogoBase64() {
+export async function getLogoBase64(){
 
   const asset = Asset.fromModule(
     require('../../../assets/MyPointLogo.png')
