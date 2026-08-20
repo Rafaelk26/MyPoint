@@ -49,11 +49,12 @@ export default function Docs() {
   useEffect(() => {
     async function loadPDFs() {
 
-      if (!user?.id) {
+      if(!user?.id){
+        setLoading(false);
         return;
       }
 
-      try {
+      try{
         setLoading(true);
         const data = await getWorkDayPDFs(user.id);
         const formattedPDFs = data.map(item => ({
@@ -70,28 +71,15 @@ export default function Docs() {
         setPdf(formattedPDFs);
 
       } 
-      catch (error) {
-        console.log(
-          'Erro ao carregar PDFs:',
-          error
-        );
+      catch(error){
+        console.log('Erro ao carregar PDFs:', error);
       } 
-      finally {
+      finally{
         setLoading(false);
       }
     }
     loadPDFs();
   }, [user?.id]);
-
-  useEffect(()=>{
-    async function load(){
-        setLoading(true);
-        await new Promise(resolve=>setTimeout(resolve, 1000));
-        setLoading(false);
-    }
-
-    load();
-  }, []);
 
  return (
     <Screen loading={loading}>
@@ -107,22 +95,22 @@ export default function Docs() {
           
           <ViewSelect>
             <Picker
-            style={{ marginTop: 0, fontSize: theme.fonts.bold }}
+            style={{ marginTop: 0, fontSize: theme.fonts.bold, color: '#000' }}
             selectedValue={value}
             onValueChange={(value)=> setValue(value)}
             >
-              <Picker.Item key={1} label={'Janeiro de 2026'} value={'01'} />
-              <Picker.Item key={1} label={'Fevereiro de 2026'} value={'02'} />
-              <Picker.Item key={1} label={'Março de 2026'} value={'03'} />
-              <Picker.Item key={1} label={'Abril de 2026'} value={'04'} />
-              <Picker.Item key={1} label={'Maio de 2026'} value={'05'} />
-              <Picker.Item key={1} label={'Junho de 2026'} value={'06'} />
-              <Picker.Item key={1} label={'Julho de 2026'} value={'07'} />
-              <Picker.Item key={1} label={'Agosto de 2026'} value={'08'} />
-              <Picker.Item key={1} label={'Setembro de 2026'} value={'09'} />
-              <Picker.Item key={1} label={'Outubro de 2026'} value={'10'} />
-              <Picker.Item key={1} label={'Novembro de 2026'} value={'11'} />
-              <Picker.Item key={1} label={'Dezembro de 2026'} value={'12'} />
+              <Picker.Item key={'01'} label={'Janeiro de 2026'} value={'01'} />
+              <Picker.Item key={'02'} label={'Fevereiro de 2026'} value={'02'} />
+              <Picker.Item key={'03'} label={'Março de 2026'} value={'03'} />
+              <Picker.Item key={'04'} label={'Abril de 2026'} value={'04'} />
+              <Picker.Item key={'05'} label={'Maio de 2026'} value={'05'} />
+              <Picker.Item key={'06'} label={'Junho de 2026'} value={'06'} />
+              <Picker.Item key={'07'} label={'Julho de 2026'} value={'07'} />
+              <Picker.Item key={'08'} label={'Agosto de 2026'} value={'08'} />
+              <Picker.Item key={'09'} label={'Setembro de 2026'} value={'09'} />
+              <Picker.Item key={'10'} label={'Outubro de 2026'} value={'10'} />
+              <Picker.Item key={'11'} label={'Novembro de 2026'} value={'11'} />
+              <Picker.Item key={'12'} label={'Dezembro de 2026'} value={'12'} />
             </Picker>
           </ViewSelect>
         </ContainerFilterMonth> 

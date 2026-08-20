@@ -7,6 +7,7 @@ export const ContainerInput = styled.View`
 
 export const InputView = styled.TextInput`
     border: 1px solid #CACACA;
+    color: #000;
     border-radius: 10px;
     width: 100%;
     padding: 14px;

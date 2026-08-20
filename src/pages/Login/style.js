@@ -17,12 +17,16 @@ export const ContainerTitle = styled.View`
 export const TitleLogin = styled.Text`
   margin-top: 40px;
   font-size: 40px;
+  line-height: 50px;
   font-family: ${({ theme }) => theme.fonts.bold};
+  text-align: center;
 `;
 
 export const SubtitleLogin = styled.Text`
+  width: 100%;
   text-align: center;
   font-size: 16px;
+  line-height: 24px;
   color: ${({ theme }) => theme.colors.textSecondary};
   font-family: ${({ theme }) => theme.fonts.regular};
 `;

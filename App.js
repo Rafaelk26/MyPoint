@@ -30,6 +30,10 @@ export default function App() {
     Poppins_700Bold,
   });
 
+  if(!fontsLoaded){
+    return null;
+  }
+
   return (
     <UserProvider>
       <NavigationContainer>

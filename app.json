@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/MyPointLogo.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.rafaelk26.MyPoint"
     },
     "web": {
       "favicon": "./assets/MyPointLogo.png"
@@ -29,6 +30,11 @@
     "plugins": [
       "expo-font",
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "31252f75-b522-4bde-a873-3231b46da398"
+      }
+    }
   }
 }

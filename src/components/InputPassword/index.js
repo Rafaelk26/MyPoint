@@ -6,7 +6,7 @@ import { ContainerInput, InputView, IconView, IconButton } from './style';
 
 export function InputPassword({ placeholder, ...rest }) {
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
 
 
  return (
